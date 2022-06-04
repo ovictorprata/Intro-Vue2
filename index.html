@@ -28,9 +28,14 @@
                 <img :src="image" alt="" />
               </div>
               <div class="course-info">
-                <h2 class="title mb-2">{{ course }}</h2>
+                <h2 class="title mb-2">
+                  {{ course }} <span class="badge">Em breve</span>
+                </h2>
                 <p class="description">{{ description }}</p>
-                <p>{{ duration }} horas</p>
+                <div class="course-actions pa-1">
+                  <span>{{ duration }} horas</span>
+                  <button class="btn btn-primary">Iniciar</button>
+                </div>
               </div>
             </div>
           </li>
@@ -39,17 +44,6 @@
     </div>
 
     <!-- Inicializa App VueJS -->
-    <script>
-      var app = new Vue({
-        el: "#app",
-        data: {
-          course: "D-Já Vue - Uma jornada pela Web",
-          image: "./images/dejavu_matrix.jpg",
-          description:
-            "Como construir aplicações web com agilidade e qualidade.",
-          duration: 42,
-        },
-      });
-    </script>
+    <script src="./js/main.js"></script>
   </body>
 </html>
