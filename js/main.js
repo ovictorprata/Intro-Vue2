@@ -5,6 +5,7 @@ var app = new Vue({
     image: "./images/dejavu_matrix.jpg",
     description: "Como construir aplicações web com agilidade e qualidade.",
     duration: 42,
-    ativo: false,
+    ativo: true,
+    valor: 100,
   },
 });

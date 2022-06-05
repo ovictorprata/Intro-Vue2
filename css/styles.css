@@ -87,6 +87,14 @@ select {
   width: 50%;
 }
 
+.light {
+  font-weight: 100;
+}
+
+.bold {
+  font-weight: 600;
+}
+
 .course .course-image img {
   border: 2px solid #d8d8d8;
   width: 80%;
@@ -121,7 +129,6 @@ select {
   color: #fff;
   padding: 4px 16px;
   border-radius: 16px;
-  font-weight: 100;
 }
 
 @media only screen and (max-width: 600px) {
