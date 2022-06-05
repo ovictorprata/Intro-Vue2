@@ -34,17 +34,15 @@
                 </h2>
                 <p class="description">{{ description }}</p>
                 <div class="course-actions pa-1">
-                  <p class="badge keep-left bold">FREE</p>
-                  <p class="badge keep-left bold">R$ {{ valor }}</p>
+                  <p v-if="valor == 0" class="badge keep-left bold">FREE</p>
+                  <p v-else class="badge keep-left bold">R$ {{ valor }}</p>
                   <span>{{ duration }} horas</span>
-                  <button class="btn btn-primary" v-if="ativo">Iniciar</button>
-                  <button class="btn" :disabled="!ativo" v-else>Iniciar</button>
-
-                  <!--
-                    TODO:
-                    Veja como remover a classe btn-primary usando class binding
-                    ao invés de utilziar v-else duplicando o botão!
-                  -->
+                  <button
+                    :class="{btn: true, 'btn-primary': ativo && valor == 0}"
+                    :disabled="!ativo || valor > 0"
+                  >
+                    Iniciar
+                  </button>
                 </div>
               </div>
             </div>
