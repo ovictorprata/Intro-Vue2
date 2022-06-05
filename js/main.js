@@ -5,8 +5,8 @@ var app = new Vue({
     image: "./images/dejavu_matrix.jpg",
     description: "Como construir aplicações web com agilidade e qualidade.",
     duration: 42,
-    ativo: true,
-    valor: 100,
+    active: true,
+    price: 100,
     courses: [
       {
         id: 1,
@@ -14,7 +14,8 @@ var app = new Vue({
         image: "./images/dejavu_matrix.jpg",
         description: "Como construir aplicações web com agilidade e qualidade.",
         duration: 42,
-        ativo: true,
+        active: true,
+        price: 100,
       },
       {
         id: 2,
@@ -23,7 +24,8 @@ var app = new Vue({
         description:
           "Entendendo Git através dos primeiros comandos via linha de comando.",
         duration: 21,
-        ativo: true,
+        active: false,
+        price: 900,
       },
       {
         id: 3,
@@ -32,7 +34,8 @@ var app = new Vue({
         description:
           "Entendendo Git através dos primeiros comandos via linha de comando.",
         duration: 21,
-        ativo: false,
+        active: true,
+        price: 0,
       },
     ],
   },
