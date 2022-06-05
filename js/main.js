@@ -1,6 +1,8 @@
 var app = new Vue({
   el: "#app",
   data: {
+    shoppingList: [],
+    studyingList: [],
     courses: [
       {
         id: 1,

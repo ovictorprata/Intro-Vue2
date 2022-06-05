@@ -7,12 +7,25 @@
     <link rel="stylesheet" href="./css/styles.css" />
     <!-- Importa o JS do Framework VueJS -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- Import Fontawesome Icons-->
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"
+      integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <!-- Container gerenciado pelo VueJS -->
     <div id="app">
       <section class="header">
         <h1 class="title center ma-3">VueJS - Top Cursos</h1>
+        <div class="cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-counter buy">0</span>
+          <i class="fa-solid fa-graduation-cap ml-2"></i>
+          <span class="cart-counter study">0</span>
+        </div>
       </section>
       <section class="banner">
         <header>
@@ -48,10 +61,10 @@
                   </p>
                   <span>{{ course.duration }} horas</span>
                   <button
-                    :class="{btn: true, 'btn-primary': course.active && course.price == 0}"
-                    :disabled="!course.active || course.price > 0"
+                    :class="{btn: true, 'btn-primary': course.active}"
+                    :disabled="!course.active"
                   >
-                    Iniciar Curso
+                    {{ course.price > 0 ? 'Comprar Curso' : 'Iniciar Curso'}}
                   </button>
                 </div>
               </div>
