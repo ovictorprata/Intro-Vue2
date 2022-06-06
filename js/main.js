@@ -56,4 +56,9 @@ var app = new Vue({
       targetList.push(course);
     },
   },
+  computed: {
+    studentNote() {
+      return "Deixa aqui uma nota para o estudadente...";
+    },
+  },
 });

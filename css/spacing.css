@@ -37,3 +37,7 @@
 .keep-left {
   margin-right: auto;
 }
+
+.center {
+  text-align: center;
+}
