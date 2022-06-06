@@ -53,25 +53,23 @@
                 </h2>
                 <p class="description">{{ course.description }}</p>
                 <div class="course-actions pa-1">
+                  <!-- Desafio: Como fazer o valor 'FREE' também pegar a cor customizada?-->
+
                   <p v-if="course.price == 0" class="badge keep-left bold">
                     FREE
                   </p>
-                  <!--
-                    Como alterar de modo a pegar a cor e mensagem de aviso do curso?
-                  -->
                   <p
-                    v-else-if="course.id == 1"
+                    v-else
                     class="badge keep-left bold"
-                    style="background-color: #ffc31c"
+                    :style="{ 'background-color': course.style && course.style.priceColor ? course.style.priceColor : theme.priceColorDefault }"
                   >
                     R$ {{ course.price }}
                   </p>
-                  <p v-else class="badge keep-left bold">
-                    R$ {{ course.price }}
-                  </p>
-                  <span v-if="course.id == 1" class="keep-left bold"
-                    >👉 50% Desconto! Últimos dias</span
+
+                  <span v-if="course.message" class="keep-left bold"
+                    >{{ course.message }}</span
                   >
+
                   <span>{{ course.duration }} horas</span>
                   <button
                     :class="{btn: true, 'btn-primary': course.active}"

@@ -12,6 +12,10 @@ var app = new Vue({
         duration: 42,
         active: true,
         price: 100,
+        message: "👉 50% Desconto! Últimos dias",
+        style: {
+          priceColor: "#ffc31c",
+        },
       },
       {
         id: 2,
@@ -22,6 +26,7 @@ var app = new Vue({
         duration: 21,
         active: false,
         price: 900,
+        message: "👈 Melhor cursp do mercado",
       },
       {
         id: 3,
@@ -34,6 +39,9 @@ var app = new Vue({
         price: 0,
       },
     ],
+    theme: {
+      priceColorDefault: "#56ad80",
+    },
   },
   methods: {
     addCourse(course) {
