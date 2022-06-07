@@ -46,7 +46,7 @@
       <section class="course-list">
         <ul>
           <li
-            v-for="course in courses"
+            v-for="(course, index) in courses"
             :key="course.id"
             class="course-item ma-3"
           >
@@ -61,7 +61,40 @@
                     >Em breve</span
                   >
                 </h2>
-                <p class="description">{{ course.description }}</p>
+                <p class="description mb-2">{{ course.description }}</p>
+
+                <!-- REVIEW -->
+                <!--
+                  O que precisamos fazer?
+                  - Obter valor da nota
+                  - Enviar valor da nota para o 'reviews' do curso selecionado
+                  - Exibir a média das notas quando tem review
+                -->
+                <p>
+                  <i class="fa-solid fa-face-grin-stars"></i>
+                  <span class="rating bold ml-2">4.2</span>
+                </p>
+                <p><a href="#" @click.prevent="toggleReview(index)">Dar nota para o curso ({{ course.reviews.length }})</a></p>
+                <div v-show="course.showReview">
+                  <form @submit.prevent="sendRewiew">
+                    <p>
+                      <label for="rating">Nota:</label>
+                      <select id="rating" name="rating" v-model.number="course.rating">
+                        <option></option>
+                        <option>5</option>
+                        <option>4</option>
+                        <option>3</option>
+                        <option>2</option>
+                        <option>1</option>
+                      </select>
+                    </p>
+                    <p>
+                      <input type="submit" value="Enviar" class="btn btn-sm">
+                    </p>
+                </div>
+
+                <!-- REVIEW - FIM -->
+
                 <div class="course-actions pa-1">
                   <!-- Desafio: Como fazer o valor 'FREE' também pegar a cor customizada?-->
 

@@ -16,6 +16,9 @@ var app = new Vue({
         style: {
           priceColor: "#ffc31c",
         },
+        showReview: false,
+        reviews: [],
+        rating: null,
       },
       {
         id: 2,
@@ -27,6 +30,8 @@ var app = new Vue({
         active: false,
         price: 900,
         message: "👈 Melhor cursp do mercado",
+        showReview: false,
+        reviews: [],
       },
       {
         id: 3,
@@ -37,6 +42,8 @@ var app = new Vue({
         duration: 21,
         active: true,
         price: 0,
+        showReview: false,
+        reviews: [],
       },
     ],
     theme: {
@@ -54,6 +61,15 @@ var app = new Vue({
         targetList = this.studyingList;
       }
       targetList.push(course);
+    },
+    toggleReview(index) {
+      this.courses[index].showReview = !this.courses[index].showReview;
+    },
+    sendRewiew() {
+      console.log("chegue aqui no sendRewiew");
+      // Desafios:
+      // Como pegar o curso correspondente a este review?
+      // Como adicionar a nota ao course.reviews correspondente?
     },
   },
   computed: {

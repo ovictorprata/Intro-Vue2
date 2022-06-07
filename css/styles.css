@@ -61,6 +61,10 @@ select {
   cursor: pointer;
 }
 
+.btn-sm {
+  padding: 8px;
+}
+
 .btn-primary {
   background-color: #39495c;
   color: white;
@@ -93,6 +97,10 @@ select {
 
 .bold {
   font-weight: 600;
+}
+
+.course-info .rating {
+  font-size: 1.3rem;
 }
 
 .course .course-image img {
