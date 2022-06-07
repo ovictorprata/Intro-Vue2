@@ -65,11 +65,29 @@ var app = new Vue({
     toggleReview(index) {
       this.courses[index].showReview = !this.courses[index].showReview;
     },
-    sendRewiew() {
-      console.log("chegue aqui no sendRewiew");
-      // Desafios:
-      // Como pegar o curso correspondente a este review?
-      // Como adicionar a nota ao course.reviews correspondente?
+    sendRewiew(courseIndex) {
+      if (!this.courses[courseIndex].rating) {
+        alert("Selecione um nota antes de enviar!");
+        return;
+      }
+      let newReview = {
+        date: new Date().toISOString(),
+        rating: this.courses[courseIndex].rating,
+      };
+      this.courses[courseIndex].reviews.push(newReview);
+      this.courses[courseIndex].rating = undefined;
+      this.courses[courseIndex].showReview = false;
+    },
+    calcRating(courseIndex) {
+      let reviews = this.courses[courseIndex].reviews;
+      let total = 0;
+      if (!reviews || reviews.length == 0) {
+        return 0;
+      }
+      for (let index in reviews) {
+        total += reviews[index].rating;
+      }
+      return (total / reviews.length).toFixed(1);
     },
   },
   computed: {
