@@ -22,6 +22,11 @@
   margin-left: 16px;
 }
 
+.my-2 {
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
 .pa-1 {
   padding: 8px;
 }
@@ -32,6 +37,11 @@
 
 .pa-3 {
   padding: 32px;
+}
+
+.px-1 {
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .keep-left {

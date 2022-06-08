@@ -67,10 +67,23 @@
                 <p>
                   <i class="fa-solid fa-face-grin-stars"></i>
                   <span v-if="course.reviews && course.reviews.length > 0" class="rating bold ml-2">{{ calcRating(index) }}</span>
-                  <span v-else class="rating ml-2">Sem revisão</span>
+                  <span v-else class="rating ml-2">4.0</span>
                 </p>
-                <p><a href="#" @click.prevent="toggleReview(index)">Dar nota para o curso ({{ course.reviews.length }})</a></p>
-                <div v-show="course.showReview">
+
+                <ul>
+                  <li
+                    class="tabs"
+                  >
+                    Notas
+                  </li>
+                  <li
+                    class="tabs activeTab"
+                  >
+                    Dar uma nota
+                  </li>
+                </ul>
+
+                <div v-show="true">
                   <form @submit.prevent="sendRewiew(index)">
                     <p>
                       <label for="rating">Nota:</label>
