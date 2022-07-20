@@ -7,22 +7,14 @@ for Vue3 : https://github.com/FranckFreiburger/vue3-sfc-loader
 var app = new Vue({
   el: "#app",
   components: {
-    'alerta': httpVueLoader('./components/alerta.vue')
+    'alerta': httpVueLoader('./components/alerta.vue'),
+    'toast': httpVueLoader('./components/toast.vue')
   },
   data: {
     shoppingList: [],
     studyingList: [],
     tabs: ["Notas", "Dar uma nota"],
-    toast: {
-      duration: 4000,
-      visible: false,
-      message: "Oi",
-      style: {
-        "vue-toast": true,
-        success: true,
-        hide: false,
-      },
-    },
+    toastMessage: '',
     courses: [
       {
         id: 1,
@@ -87,7 +79,9 @@ var app = new Vue({
         targetList = this.studyingList;
       }
       targetList.push(course);
-      this.showToast(`${course.course.split(" - ")[0]} adicionado na sua lista de cursos!`)
+
+      this.toastMessage = `${course.course.split(" - ")[0]} adicionado na sua lista de cursos!`;
+      this.$refs.toast.showToast();
     },
     selectTab(courseIndex, tab) {
       this.courses[courseIndex].selectedTab = tab;
@@ -122,9 +116,8 @@ var app = new Vue({
       course.review = undefined;
       course.selectedTab = undefined;
 
-      this.showToast(
-        "Sua reivão foi enviada! Muito obrigado pela contribuição"
-      );
+      this.toastMessage = "Sua reivão foi enviada! Muito obrigado pela contribuição";
+      this.$refs.toast.showToast()
     },
     calcRating(courseIndex) {
       let reviews = this.courses[courseIndex].reviews;
@@ -136,22 +129,7 @@ var app = new Vue({
         total += reviews[index].rating;
       }
       return (total / reviews.length).toFixed(1);
-    },
-    showToast(message) {
-      /**
-       * Segue a fonte/inspiração deste toast:
-       * https://github.com/ihaichao/vue-toast-plugin
-       */
-      this.toast.visible = false;
-      this.toast.message = message;
-      this.toast.style.hide = false;
-      this.toast.visible = true;
-
-      clearTimeout(this.toast.timer);
-      this.toast.timer = setTimeout(() => {
-        this.toast.style.hide = true;
-      }, this.toast.duration);
-    },
+    }
   },
   computed: {
     studentNote() {

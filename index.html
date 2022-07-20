@@ -19,10 +19,9 @@
   <body>
     <!-- Container gerenciado pelo VueJS -->
     <div id="app">
+
       <!-- TOAST -->
-      <div v-if="toast.visible" :class="toast.style">
-        <h3>{{ toast.message }}</h3>
-      </div>
+      <toast ref="toast" :message="toastMessage"></toast>
 
       <section class="header">
         <h1 class="title center ma-3">VueJS - Top Cursos</h1>
