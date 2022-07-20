@@ -78,6 +78,7 @@ var app = new Vue({
         targetList = this.studyingList;
       }
       targetList.push(course);
+      this.showToast(`${course.course.split(" - ")[0]} adicionado na sua lista de cursos!`)
     },
     selectTab(courseIndex, tab) {
       this.courses[courseIndex].selectedTab = tab;
