@@ -1,3 +1,29 @@
+Vue.component('alerta', {
+  props: ['texto', 'icone'],
+  template: `
+    <div :class="badgeClasses">
+      <h3><i :class="iconClasses"></i> {{ texto }}</h3>
+    </div>
+  `,
+  data() {
+    return {
+      iconList: {
+        'success': 'fa-check',
+        'warning': 'fa-triangle-exclamation',
+        'danger': 'fa-bomb'
+      }
+    }
+  },
+  computed: {
+    badgeClasses() {
+      return ['badge', 'alert', this.icone || 'success'];
+    },
+    iconClasses() {
+      return ['fa-solid', this.iconList[this.icone || 'success']];
+    }
+  }
+});
+
 var app = new Vue({
   el: "#app",
   data: {
