@@ -8,12 +8,12 @@ var app = new Vue({
   el: "#app",
   components: {
     'alerta': httpVueLoader('./components/alerta.vue'),
-    'toast': httpVueLoader('./components/toast.vue')
+    'toast': httpVueLoader('./components/toast.vue'),
+    'review': httpVueLoader('./components/review.vue')
   },
   data: {
     shoppingList: [],
     studyingList: [],
-    tabs: ["Notas", "Dar uma nota"],
     toastMessage: '',
     courses: [
       {
@@ -83,43 +83,16 @@ var app = new Vue({
       this.toastMessage = `${course.course.split(" - ")[0]} adicionado na sua lista de cursos!`;
       this.$refs.toast.showToast();
     },
-    selectTab(courseIndex, tab) {
-      this.courses[courseIndex].selectedTab = tab;
-    },
-    sendRewiew(courseIndex) {
-      /* 
-      Como utiliar recursos do HTML para não precisar do código de validação abaixo?
-      Existe alguma vantagem em fazer assim?
-      **/
-      const course = this.courses[courseIndex];
-      course.errors = [];
-      if (!course.name || !course.name.trim()) {
-        course.errors.push("Campo nome precisa ser preenchido");
-      }
-      if (!course.rating) {
-        course.errors.push("Selecione uma nota");
-      }
-
-      if (course.errors.length > 0) {
-        return;
-      }
-
-      let newReview = {
-        date: new Date().toISOString(),
-        name: course.name,
-        review: course.review,
-        rating: course.rating,
-      };
-      course.reviews.push(newReview);
-      course.rating = undefined;
-      course.name = undefined;
-      course.review = undefined;
-      course.selectedTab = undefined;
-
-      this.toastMessage = "Sua reivão foi enviada! Muito obrigado pela contribuição";
-      this.$refs.toast.showToast()
+    showReview(mensagem) {
+      this.toastMessage = mensagem;
+      this.$refs.toast.showToast();
     },
     calcRating(courseIndex) {
+      /**
+       * Com base em todas reviews, retorna a média da nota
+       * Este método estava calculando a nota e retornando uma
+       * string formatada, agora retorna o NÚMERO (média de verdade)
+       */
       let reviews = this.courses[courseIndex].reviews;
       let total = 0;
       if (!reviews || reviews.length == 0) {
@@ -128,7 +101,7 @@ var app = new Vue({
       for (let index in reviews) {
         total += reviews[index].rating;
       }
-      return (total / reviews.length).toFixed(1);
+      return (total / reviews.length);
     }
   },
   computed: {
