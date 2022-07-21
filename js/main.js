@@ -9,7 +9,7 @@ var app = new Vue({
   components: {
     'alerta': httpVueLoader('./components/alerta.vue'),
     'toast': httpVueLoader('./components/toast.vue'),
-    'review': httpVueLoader('./components/review.vue')
+    'course': httpVueLoader('./components/course.vue')
   },
   data: {
     shoppingList: [],
@@ -64,12 +64,9 @@ var app = new Vue({
         selectedTab: null,
       },
     ],
-    theme: {
-      priceColorDefault: "#56ad80",
-    },
   },
   methods: {
-    addCourse(course) {
+    onAddCourse(course) {
       /**
        * Adiciona curso na lista de compras se o valor for > 0
        * caso contrário, adiciona na lista de estudos
@@ -83,25 +80,9 @@ var app = new Vue({
       this.toastMessage = `${course.course.split(" - ")[0]} adicionado na sua lista de cursos!`;
       this.$refs.toast.showToast();
     },
-    showReview(mensagem) {
+    onShowReview(mensagem) {
       this.toastMessage = mensagem;
       this.$refs.toast.showToast();
-    },
-    calcRating(courseIndex) {
-      /**
-       * Com base em todas reviews, retorna a média da nota
-       * Este método estava calculando a nota e retornando uma
-       * string formatada, agora retorna o NÚMERO (média de verdade)
-       */
-      let reviews = this.courses[courseIndex].reviews;
-      let total = 0;
-      if (!reviews || reviews.length == 0) {
-        return 0;
-      }
-      for (let index in reviews) {
-        total += reviews[index].rating;
-      }
-      return (total / reviews.length);
     }
   },
   computed: {
