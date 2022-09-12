@@ -1,106 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Vue Mastery Clone - PT-BR</title>
-    <!-- Import Styles -->
-    <link rel="stylesheet" href="./css/styles.css" />
-    <!-- Importa o JS do Framework VueJS -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-  </head>
-  <body>
-    <!-- Container gerenciado pelo VueJS -->
-    <div id="app">
-      <section class="header">
-        <h1 class="title center ma-3">VueJS - Top Cursos</h1>
-      </section>
-      <section class="banner">
-        <header>
-          <h2 class="title">Investir em conhecimento tem os melhores juros.</h2>
-        </header>
-      </section>
 
-      <section class="course-list">
-        <ul>
-          <li class="course-item ma-3">
-            <div class="course">
-              <div class="course-image">
-                <img :src="image" alt="" />
-              </div>
-              <div class="course-info">
-                <h2 class="title mb-2">
-                  {{ course }}
-                  <span class="badge light" v-if="!active">Em breve</span>
-                </h2>
-                <p class="description">{{ description }}</p>
-                <div class="course-actions pa-1">
-                  <p v-if="price == 0" class="badge keep-left bold">FREE</p>
-                  <p v-else class="badge keep-left bold">R$ {{ price }}</p>
-                  <span>{{ duration }} horas</span>
-                  <button
-                    :class="{btn: true, 'btn-primary': active && price == 0}"
-                    :disabled="!active || price > 0"
-                  >
-                    Iniciar
-                  </button>
-                </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>Vue Mastery Clone - PT-BR</title>
+  <!-- Import Styles -->
+  <link rel="stylesheet" href="./css/styles.css" />
+  <!-- Importa o JS do Framework VueJS -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+  <!-- Container gerenciado pelo VueJS -->
+  <div id="app">
+    <section class="header">
+      <h1 class="title center ma-3">VueJS - Top Cursos</h1>
+    </section>
+    <section class="banner">
+      <header>
+        <h2 class="title">Investir em conhecimento tem os melhores juros.</h2>
+      </header>
+    </section>
+
+    <section class="course-list">
+      <ul v-for="course in courses">
+        <li class="course-item ma-3">
+          <div class="course">
+            <div class="course-image">
+              <img :src="course.image" alt="" />
+            </div>
+            <div class="course-info">
+              <h2 class="title mb-2">
+                {{ course.course }}
+                <span class="badge light" v-if="!active">Em breve</span>
+              </h2>
+              <p class="description">{{ course.description }}</p>
+              <div class="course-actions pa-1">
+                <p v-if="price == 0" class="badge keep-left bold">FREE</p>
+                <p v-else class="badge keep-left bold">R$ {{ course.price }}</p>
+                <span>{{ course.duration }} horas</span>
+                <button :class="{btn: true, 'btn-primary': active && price == 0}" :disabled="!active || price > 0">
+                  Iniciar
+                </button>
               </div>
             </div>
-          </li>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
 
-          <!--
-            Como evitar a repetição do <li> de cursos?
-          -->
+  <!-- Inicializa App VueJS -->
+  <script src="./js/main.js"></script>
+</body>
 
-          <!-- Curso 2 -->
-          <li class="course-item ma-3">
-            <div class="course">
-              <div class="course-image">
-                <img src="./images/logo-git-430-215-v3.jpg" alt="" />
-              </div>
-              <div class="course-info">
-                <h2 class="title mb-2">
-                  Git - Via terminal para aprender da forma correta!
-                  <span class="badge light">Em breve</span>
-                </h2>
-                <p class="description">
-                  Entendendo Git através dos primeiros comandos via linha de
-                  comando.
-                </p>
-                <div class="course-actions pa-1">
-                  <p class="badge keep-left bold">R$ 900</p>
-                  <span>21 horas</span>
-                  <button class="btn" disabled>Iniciar</button>
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <!-- Curso 3 -->
-          <li class="course-item ma-3">
-            <div class="course">
-              <div class="course-image">
-                <img src="./images/logo-linux960x430.jpg" alt="" />
-              </div>
-              <div class="course-info">
-                <h2 class="title mb-2">Linux - Entendendo a tela preta!</h2>
-                <p class="description">
-                  Entendendo Git através dos primeiros comandos via linha de
-                  comando.
-                </p>
-                <div class="course-actions pa-1">
-                  <p class="badge keep-left bold">FREE</p>
-                  <span>21 horas</span>
-                  <button class="btn btn-primary">Iniciar</button>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </section>
-    </div>
-
-    <!-- Inicializa App VueJS -->
-    <script src="./js/main.js"></script>
-  </body>
 </html>
