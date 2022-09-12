@@ -36,16 +36,15 @@ var app = new Vue({
     ],
   },
   methods: {
-    addCourse(course) {
-      /**
-       * Adiciona curso na lista de compras se o valor for > 0
-       * caso contrário, adiciona na lista de estudos
-       */
-      let targetList = this.shoppingList;
-      if (course.price == 0) {
-        targetList = this.studyingList;
+    adicionarCurso(course){
+
+      if(course.price != 0){
+        this.shoppingList.push(course.course)
       }
-      targetList.push(course);
-    },
-  },
+      else{
+        this.studyingList.push(course.course)
+      }
+      console.log(this.shoppingList, this.studyingList)
+    }
+  }
 });
