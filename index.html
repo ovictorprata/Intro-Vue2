@@ -1,59 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Vue Mastery Clone - PT-BR</title>
-    <!-- Import Styles -->
-    <link rel="stylesheet" href="./css/styles.css" />
-    <!-- Importa o JS do Framework VueJS -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-  </head>
-  <body>
-    <!-- Container gerenciado pelo VueJS -->
-    <div id="app">
-      <section class="header">
-        <h1 class="title center ma-3">VueJS - Top Cursos</h1>
-      </section>
-      <section class="banner">
-        <header>
-          <h2 class="title">Investir em conhecimento tem os melhores juros.</h2>
-        </header>
-      </section>
 
-      <section class="course-list">
-        <ul>
-          <li class="course-item ma-3">
-            <div class="course">
-              <div class="course-image">
-                <img :src="image" alt="" />
-              </div>
-              <div class="course-info">
-                <h2 class="title mb-2">
-                  {{ course }}
-                  <span class="badge light" v-if="!ativo">Em breve</span>
-                </h2>
-                <p class="description">{{ description }}</p>
-                <div class="course-actions pa-1">
-                  <p class="badge keep-left bold">FREE</p>
-                  <p class="badge keep-left bold">R$ {{ valor }}</p>
-                  <span>{{ duration }} horas</span>
-                  <button class="btn btn-primary" v-if="ativo">Iniciar</button>
-                  <button class="btn" :disabled="!ativo" v-else>Iniciar</button>
+<head>
+  <meta charset="UTF-8" />
+  <title>Vue Mastery Clone - PT-BR</title>
+  <!-- Import Styles -->
+  <link rel="stylesheet" href="./css/styles.css" />
+  <!-- Importa o JS do Framework VueJS -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
 
-                  <!--
+<body>
+  <!-- Container gerenciado pelo VueJS -->
+  <div id="app">
+    <section class="header">
+      <h1 class="title center ma-3">VueJS - Top Cursos</h1>
+    </section>
+    <section class="banner">
+      <header>
+        <h2 class="title">Investir em conhecimento tem os melhores juros.</h2>
+      </header>
+    </section>
+
+    <section class="course-list">
+      <ul>
+        <li class="course-item ma-3">
+          <div class="course">
+            <div class="course-image">
+              <img :src="image" alt="" />
+            </div>
+            <div class="course-info">
+              <h2 class="title mb-2">
+                {{ course }}
+                <span class="badge light" v-if="!ativo">Em breve</span>
+              </h2>
+              <p class="description">{{ description }}</p>
+              <div class="course-actions pa-1">
+                <p class="badge keep-left bold">FREE</p>
+                <p class="badge keep-left bold">R$ {{ valor }}</p>
+                <span>{{ duration }} horas</span>
+                <button class="btn btn-primary" v-if="ativo">Iniciar</button>
+                <button class="btn" :disabled="!ativo" v-else>Iniciar</button>
+
+                <!--
                     TODO:
                     Veja como remover a classe btn-primary usando class binding
                     ao invés de utilziar v-else duplicando o botão!
                   -->
-                </div>
               </div>
             </div>
-          </li>
-        </ul>
-      </section>
-    </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
 
-    <!-- Inicializa App VueJS -->
-    <script src="./js/main.js"></script>
-  </body>
+  <!-- Inicializa App VueJS -->
+  <script src="./js/main.js"></script>
+</body>
+
 </html>
