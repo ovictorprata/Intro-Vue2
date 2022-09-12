@@ -1,80 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Vue Mastery Clone - PT-BR</title>
-    <!-- Import Styles -->
-    <link rel="stylesheet" href="./css/styles.css" />
-    <!-- Importa o JS do Framework VueJS -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <!-- Import Fontawesome Icons-->
-    <script
-      defer
-      src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"
-      integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <!-- Container gerenciado pelo VueJS -->
-    <div id="app">
-      <section class="header">
-        <h1 class="title center ma-3">VueJS - Top Cursos</h1>
-        <div class="cart">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span class="cart-counter buy">0</span>
-          <i class="fa-solid fa-graduation-cap ml-2"></i>
-          <span class="cart-counter study">0</span>
-        </div>
-      </section>
-      <section class="banner">
-        <header>
-          <h2 class="title">Investir em conhecimento tem os melhores juros.</h2>
-        </header>
-      </section>
 
-      <section class="course-list">
-        <ul>
-          <li
-            v-for="course in courses"
-            :key="course.id"
-            class="course-item ma-3"
-          >
-            <div class="course">
-              <div class="course-image">
-                <img :src="course.image" alt="" />
-              </div>
-              <div class="course-info">
-                <h2 class="title mb-2">
-                  {{ course.course }}
-                  <span class="badge light" v-if="!course.active"
-                    >Em breve</span
-                  >
-                </h2>
-                <p class="description">{{ course.description }}</p>
-                <div class="course-actions pa-1">
-                  <p v-if="course.price == 0" class="badge keep-left bold">
-                    FREE
-                  </p>
-                  <p v-else class="badge keep-left bold">
-                    R$ {{ course.price }}
-                  </p>
-                  <span>{{ course.duration }} horas</span>
-                  <button
-                    :class="{btn: true, 'btn-primary': course.active}"
-                    :disabled="!course.active"
-                  >
-                    {{ course.price > 0 ? 'Comprar Curso' : 'Iniciar Curso'}}
-                  </button>
-                </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>Vue Mastery Clone - PT-BR</title>
+  <!-- Import Styles -->
+  <link rel="stylesheet" href="./css/styles.css" />
+  <!-- Importa o JS do Framework VueJS -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <!-- Import Fontawesome Icons-->
+  <script defer src="https://use.fontawesome.com/releases/v6.1.1/js/all.js" integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- Container gerenciado pelo VueJS -->
+  <div id="app">
+    <section class="header">
+      <h1 class="title center ma-3">VueJS - Top Cursos</h1>
+      <div class="cart">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-counter buy">{{shoppingList.length}}</span>
+        <i class="fa-solid fa-graduation-cap ml-2"></i>
+        <span class="cart-counter study">{{studyingList.length}}</span>
+      </div>
+    </section>
+    <section class="banner">
+      <header>
+        <h2 class="title">Investir em conhecimento tem os melhores juros.</h2>
+      </header>
+    </section>
+
+    <section class="course-list">
+      <ul>
+        <li v-for="course in courses" :key="course.id" class="course-item ma-3">
+          <div class="course">
+            <div class="course-image">
+              <img :src="course.image" alt="" />
+            </div>
+            <div class="course-info">
+              <h2 class="title mb-2">
+                {{ course.course }}
+                <span class="badge light" v-if="!course.active">Em breve</span>
+              </h2>
+              <p class="description">{{ course.description }}</p>
+              <div class="course-actions pa-1">
+                <p v-if="course.price == 0" class="badge keep-left bold">
+                  FREE
+                </p>
+                <p v-else class="badge keep-left bold">
+                  R$ {{ course.price }}
+                </p>
+                <span>{{ course.duration }} horas</span>
+                <button :class="{btn: true, 'btn-primary': course.active}" :disabled="!course.active" @click="adicionarCurso(course)">
+                  {{ course.price > 0 ? 'Comprar Curso' : 'Iniciar Curso'}}
+                </button>
               </div>
             </div>
-          </li>
-        </ul>
-      </section>
-    </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
 
-    <!-- Inicializa App VueJS -->
-    <script src="./js/main.js"></script>
-  </body>
+  <!-- Inicializa App VueJS -->
+  <script src="./js/main.js"></script>
+</body>
+
 </html>

@@ -35,4 +35,16 @@ var app = new Vue({
       },
     ],
   },
+  methods: {
+    adicionarCurso(course){
+
+      if(course.price != 0){
+        this.shoppingList.push(course.course)
+      }
+      else{
+        this.studyingList.push(course.course)
+      }
+      console.log(this.shoppingList, this.studyingList)
+    }
+  }
 });
