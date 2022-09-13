@@ -76,8 +76,17 @@ var app = new Vue({
       let targetList = this.shoppingList;
       if (course.price == 0) {
         targetList = this.studyingList;
+        this.showToast(
+          "Seu curso foi adicionado na sua lista de estudos!"
+        );
+      }
+      else{
+        this.showToast(
+          "Seu curso foi adicionado ao carrinho!"
+        );
       }
       targetList.push(course);
+      
     },
     selectTab(courseIndex, tab) {
       this.courses[courseIndex].selectedTab = tab;
