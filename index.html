@@ -1,135 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Vue Mastery Clone - PT-BR</title>
-    <!-- Import Styles -->
-    <link rel="stylesheet" href="./css/styles.css" />
-    <!-- Importa o JS do Framework VueJS -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <!-- Import Fontawesome Icons-->
-    <script
-      defer
-      src="https://use.fontawesome.com/releases/v6.1.1/js/all.js"
-      integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <!-- Container gerenciado pelo VueJS -->
-    <div id="app">
-      <section class="header">
-        <h1 class="title center ma-3">VueJS - Top Cursos</h1>
-        <div class="cart">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span class="cart-counter buy">{{ shoppingList.length }}</span>
-          <i class="fa-solid fa-graduation-cap ml-2"></i>
-          <span class="cart-counter study">{{ studyingList.length }}</span>
-        </div>
-      </section>
-      <section class="banner mb-2">
-        <header>
-          <h2 class="title">Investir em conhecimento tem os melhores juros.</h2>
-        </header>
-      </section>
 
-      <section class="center">
-        <!--
+<head>
+  <meta charset="UTF-8" />
+  <title>Vue Mastery Clone - PT-BR</title>
+  <!-- Import Styles -->
+  <link rel="stylesheet" href="./css/styles.css" />
+  <!-- Importa o JS do Framework VueJS -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <!-- Import Fontawesome Icons-->
+  <script defer src="https://use.fontawesome.com/releases/v6.1.1/js/all.js" integrity="sha384-xBXmu0dk1bEoiwd71wOonQLyH+VpgR1XcDH3rtxrLww5ajNTuMvBdL5SOiFZnNdp" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- Container gerenciado pelo VueJS -->
+  <div id="app">
+    <section class="header">
+      <h1 class="title center ma-3">VueJS - Top Cursos</h1>
+      <div class="cart">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-counter buy">{{ shoppingList.length }}</span>
+        <i class="fa-solid fa-graduation-cap ml-2"></i>
+        <span class="cart-counter study">{{ studyingList.length }}</span>
+      </div>
+    </section>
+    <section class="banner mb-2">
+      <header>
+        <h2 class="title">Investir em conhecimento tem os melhores juros.</h2>
+      </header>
+    </section>
+
+    <section class="center">
+      <!--
           Como exibir as seguintes mensagens (studentNote):
           - Quando nenhum curso está selecionado: Selecione um ou mais cursos e bora estudar!
           - Quando tem 1 ou mais cursos selecionado: Muito bem, você já pode iniciar seu estudo!
           - Quando tem +10: Opps! Não seria melhor focar os estudos em apenas algumas tecnologias?
         -->
-        <h2>{{ studentNote }}</h2>
-      </section>
+      <h2>{{ studentNote }}</h2>
+    </section>
 
-      <section class="course-list">
-        <ul>
-          <li
-            v-for="(course, index) in courses"
-            :key="course.id"
-            class="course-item ma-3"
-          >
-            <div class="course">
-              <div class="course-image">
-                <img :src="course.image" alt="" />
-              </div>
-              <div class="course-info">
-                <h2 class="title mb-2">
-                  {{ course.course }}
-                  <span class="badge light" v-if="!course.active"
-                    >Em breve</span
-                  >
-                </h2>
-                <p class="description mb-2">{{ course.description }}</p>
+    <section class="course-list">
+      <ul>
+        <li v-for="(course, index) in courses" :key="course.id" class="course-item ma-3">
+          <div class="course">
+            <div class="course-image">
+              <img :src="course.image" alt="" />
+            </div>
+            <div class="course-info">
+              <h2 class="title mb-2">
+                {{ course.course }}
+                <span class="badge light" v-if="!course.active">Em breve</span>
+              </h2>
+              <p class="description mb-2">{{ course.description }}</p>
 
-                <!-- REVIEW -->
-                <!--
+              <!-- REVIEW -->
+              <!--
                   O que precisamos fazer?
                   - Obter valor da nota
                   - Enviar valor da nota para o 'reviews' do curso selecionado
                   - Exibir a média das notas quando tem review
                 -->
-                <p>
-                  <i class="fa-solid fa-face-grin-stars"></i>
-                  <span class="rating bold ml-2">4.2</span>
+              <p>
+                <i class="fa-solid fa-face-grin-stars"></i>
+                <span class="rating bold ml-2">{{course.mediaReview}}</span>
+              </p>
+              <p><a href="#" @click.prevent="toggleReview(index)">Dar nota para o curso ({{ course.reviews.length }})</a></p>
+              <div v-show="course.showReview">
+                <form @submit.prevent="sendRewiew(course.id)">
+                  <p>
+                    <label for="rating">Nota:</label>
+                    <select id="rating" name="rating" v-model.number="course.rating">
+                      <option></option>
+                      <option>5</option>
+                      <option>4</option>
+                      <option>3</option>
+                      <option>2</option>
+                      <option>1</option>
+                    </select>
+                  </p>
+                  <p>
+                    <input type="submit" value="Enviar" class="btn btn-sm">
+                  </p>
+              </div>
+
+              <!-- REVIEW - FIM -->
+
+              <div class="course-actions pa-1">
+                <!-- Desafio: Como fazer o valor 'FREE' também pegar a cor customizada?-->
+
+                <p v-if="course.price == 0" class="badge keep-left bold">
+                  FREE
                 </p>
-                <p><a href="#" @click.prevent="toggleReview(index)">Dar nota para o curso ({{ course.reviews.length }})</a></p>
-                <div v-show="course.showReview">
-                  <form @submit.prevent="sendRewiew">
-                    <p>
-                      <label for="rating">Nota:</label>
-                      <select id="rating" name="rating" v-model.number="course.rating">
-                        <option></option>
-                        <option>5</option>
-                        <option>4</option>
-                        <option>3</option>
-                        <option>2</option>
-                        <option>1</option>
-                      </select>
-                    </p>
-                    <p>
-                      <input type="submit" value="Enviar" class="btn btn-sm">
-                    </p>
-                </div>
+                <p v-else class="badge keep-left bold" :style="{ 'background-color': course.style && course.style.priceColor ? course.style.priceColor : theme.priceColorDefault }">
+                  R$ {{ course.price }}
+                </p>
 
-                <!-- REVIEW - FIM -->
+                <span v-if="course.message" class="keep-left bold">{{ course.message }}</span>
 
-                <div class="course-actions pa-1">
-                  <!-- Desafio: Como fazer o valor 'FREE' também pegar a cor customizada?-->
-
-                  <p v-if="course.price == 0" class="badge keep-left bold">
-                    FREE
-                  </p>
-                  <p
-                    v-else
-                    class="badge keep-left bold"
-                    :style="{ 'background-color': course.style && course.style.priceColor ? course.style.priceColor : theme.priceColorDefault }"
-                  >
-                    R$ {{ course.price }}
-                  </p>
-
-                  <span v-if="course.message" class="keep-left bold"
-                    >{{ course.message }}</span
-                  >
-
-                  <span>{{ course.duration }} horas</span>
-                  <button
-                    :class="{btn: true, 'btn-primary': course.active}"
-                    :disabled="!course.active"
-                    @click="addCourse(course)"
-                  >
-                    {{ course.price > 0 ? 'Comprar Curso' : 'Iniciar Curso'}}
-                  </button>
-                </div>
+                <span>{{ course.duration }} horas</span>
+                <button :class="{btn: true, 'btn-primary': course.active}" :disabled="!course.active" @click="addCourse(course)">
+                  {{ course.price > 0 ? 'Comprar Curso' : 'Iniciar Curso'}}
+                </button>
               </div>
             </div>
-          </li>
-        </ul>
-      </section>
-    </div>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
 
-    <!-- Inicializa App VueJS -->
-    <script src="./js/main.js"></script>
-  </body>
+  <!-- Inicializa App VueJS -->
+  <script src="./js/main.js"></script>
+</body>
+
 </html>

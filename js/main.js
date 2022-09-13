@@ -18,6 +18,7 @@ var app = new Vue({
         },
         showReview: false,
         reviews: [],
+        mediaReview: null,
         rating: null,
       },
       {
@@ -32,6 +33,7 @@ var app = new Vue({
         message: "👈 Melhor cursp do mercado",
         showReview: false,
         reviews: [],
+        mediaReview: null,
       },
       {
         id: 3,
@@ -44,6 +46,7 @@ var app = new Vue({
         price: 0,
         showReview: false,
         reviews: [],
+        mediaReview: null,
       },
     ],
     theme: {
@@ -65,8 +68,21 @@ var app = new Vue({
     toggleReview(index) {
       this.courses[index].showReview = !this.courses[index].showReview;
     },
-    sendRewiew() {
-      console.log("chegue aqui no sendRewiew");
+    sendRewiew(id) {
+      let soma = 0
+      let media = 0
+
+      id--
+      nota = this.courses[id].rating;
+      this.courses[id].reviews.push(nota);
+
+      for(n of this.courses[id].reviews){
+        soma += n
+      }
+      
+      media = soma / this.courses[id].reviews.length
+      this.courses[id].mediaReview = media
+      //this.courses[]
       // Desafios:
       // Como pegar o curso correspondente a este review?
       // Como adicionar a nota ao course.reviews correspondente?
